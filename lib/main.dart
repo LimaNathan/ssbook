@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ssbook/pages/home_page.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 void main() {
@@ -19,16 +20,24 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'SSBOOK',
-      theme: ThemeData(
-        primarySwatch: Colors.purple,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primaryColor,
+    final HttpLink httpLink =
+        HttpLink('https://us-central1-ss-devops.cloudfunctions.net/GraphQL');
+    final ValueNotifier<GraphQLClient> client = ValueNotifier<GraphQLClient>(
+      GraphQLClient(link: httpLink, cache: GraphQLCache()),
+    );
+    return GraphQLProvider(
+      client: client,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'SSBOOK',
+        theme: ThemeData(
+          primarySwatch: Colors.purple,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: AppColors.primaryColor,
+          ),
         ),
+        home: const HomePage(),
       ),
-      home: const HomePage(),
     );
   }
 }
