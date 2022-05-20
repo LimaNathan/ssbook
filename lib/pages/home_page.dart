@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ssbook/components/custom_app_bar.dart';
+import 'package:ssbook/components/fav_authors.dart';
 import 'package:ssbook/components/fav_list.dart';
-import 'package:ssbook/components/nav_bar_button.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,10 +13,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  var selector = 0;
+  void _onItemTapped(int value) {
+    setState(() {
+      selector = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    int selector = 0;
-
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color(0xffF7F7F7),
@@ -30,63 +35,63 @@ class _HomePageState extends State<HomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 32),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Livros Favoritos',
-                    style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20,
-                      color: AppColors.secondaryColor,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'ver todos',
-                        style: GoogleFonts.roboto(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 14,
-                          color: AppColors.primaryColor,
-                        ),
-                      ),
-                    ),
-                  )
+            const FavoriteList(),
+            Container(
+              height: 500,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(32),
+                ),
+              ),
+              child: Column(
+                children: const [
+                  FavAuthors(),
                 ],
               ),
             ),
-            const FavoriteList(),
           ],
         ),
       ),
       bottomNavigationBar: GestureDetector(
-        child: NavigationBar(
+        child: BottomNavigationBar(
+          unselectedLabelStyle:
+              GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 10),
+          selectedItemColor: AppColors.primaryColor,
+          showUnselectedLabels: true,
+          unselectedItemColor: AppColors.navBarColor,
+          selectedLabelStyle:
+              GoogleFonts.roboto(fontWeight: FontWeight.w500, fontSize: 10),
           backgroundColor: Colors.white,
-          destinations: [
-            NavBarButton(
+          iconSize: 30,
+          onTap: _onItemTapped,
+          currentIndex: selector,
+          items: const [
+            BottomNavigationBarItem(
+              backgroundColor: Colors.white,
+              icon: Icon(
+                Icons.home_filled,
+              ),
               label: 'Início',
-              icon: Icons.home_filled,
-              isSelected: (selector == 0) ? true : false,
             ),
-            NavBarButton(
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add_circle_outlined,
+              ),
               label: 'Adicionar',
-              icon: Icons.add_circle_outlined,
-              isSelected: (selector == 1) ? true : false,
             ),
-            NavBarButton(
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+              ),
               label: 'Buscar',
-              icon: Icons.search,
-              isSelected: (selector == 2) ? true : false,
             ),
-            NavBarButton(
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.favorite,
+              ),
               label: 'Favoritos',
-              icon: Icons.favorite,
-              isSelected: (selector == 3) ? true : false,
             ),
           ],
         ),

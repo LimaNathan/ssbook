@@ -5,4 +5,5 @@ class AppColors {
   static const secondaryColor = Color(0xff555555);
   static const descriptionColor = Color(0xff757575);
   static const navBarColor = Color(0xff9E9E9E);
+  static const backgroundColor = Color(0xffE0E0E0);
 }
