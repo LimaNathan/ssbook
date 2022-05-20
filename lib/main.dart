@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ssbook/pages/description_page.dart';
 import 'package:ssbook/pages/home_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:ssbook/utils/app_colors.dart';
@@ -36,7 +37,10 @@ class MyApp extends StatelessWidget {
             seedColor: AppColors.primaryColor,
           ),
         ),
-        home: const HomePage(),
+        routes: {
+          '/': (context) => const HomePage(),
+          '/description': (context) => const DescriptionPage(),
+        },
       ),
     );
   }

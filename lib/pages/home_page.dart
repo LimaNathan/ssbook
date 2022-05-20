@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:ssbook/components/custom_app_bar.dart';
 import 'package:ssbook/components/fav_authors.dart';
 import 'package:ssbook/components/fav_list.dart';
+import 'package:ssbook/components/libary.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,11 +34,11 @@ class _HomePageState extends State<HomePage> {
         child: const CustomAppBar(),
       ),
       body: SingleChildScrollView(
+        physics: const AlwaysScrollableScrollPhysics(),
         child: Column(
           children: [
             const FavoriteList(),
             Container(
-              height: 500,
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -48,6 +49,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: const [
                   FavAuthors(),
+                  Libary(),
                 ],
               ),
             ),

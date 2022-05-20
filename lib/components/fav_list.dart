@@ -11,22 +11,22 @@ class FavoriteList extends StatefulWidget {
 }
 
 class _FavoriteListState extends State<FavoriteList> {
-  String getBooks = """
-
-query GetFavBooks{
-  favoriteBooks{
-  cover
-  name
-  author {
-    name
-  }
-  }
-}
-
-""";
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
+    String getBooks = """
+
+          query GetFavBooks{
+            favoriteBooks{
+            cover
+            name
+            author {
+              name
+              }
+            }
+          }
+
+""";
     return Query(
       options: QueryOptions(document: gql(getBooks)),
       builder: (
@@ -82,7 +82,7 @@ query GetFavBooks{
                 itemBuilder: (context, index) => GestureDetector(
                   onTap: () {},
                   child: Container(
-                    margin: const EdgeInsets.only(right: 10, left: 10),
+                    margin: const EdgeInsets.only(right: 5, left: 20),
                     width: 136,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
