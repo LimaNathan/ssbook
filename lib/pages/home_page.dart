@@ -47,7 +47,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
 
     return Query(
         options: QueryOptions(document: gql(getQueries)),
@@ -88,9 +87,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(
                       children: [
-                        FavAuthors(
-                          result: result,
-                        ),
+                        FavAuthors(result: result),
                         Libary(result: result),
                       ],
                     ),

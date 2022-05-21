@@ -13,6 +13,8 @@ class Libary extends StatefulWidget {
 
 class _LibaryState extends State<Libary> {
   List categories = ['ALL'];
+  var selectedCategory = 0;
+
   @override
   void initState() {
     super.initState();
@@ -24,12 +26,22 @@ class _LibaryState extends State<Libary> {
     });
   }
 
+  int _getLength() {
+    int counter = 0;
+    int completeList = widget.result.data?['allBooks'].length;
+
+    widget.result.data?['allBooks']?.forEach((book) {
+      if (categories.contains(book['category'])) {
+        counter++;
+      }
+    });
+    return (categories[selectedCategory] == 'ALL') ? completeList : counter;
+  }
+
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-
-    int? selectedCategory;
+    var height = MediaQuery.of(context).size.height;
 
     return SafeArea(
       child: Column(
@@ -95,70 +107,139 @@ class _LibaryState extends State<Libary> {
               ),
             ),
           ),
-          SizedBox(
-            width: double.infinity,
-            height: widget.result.data?['allBooks'].length * 80.toDouble(),
+          ConstrainedBox(
+            constraints: BoxConstraints(
+                maxHeight: _getLength() * (height * .115), minHeight: 80),
             child: ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: widget.result.data?['allBooks'].length,
-              itemBuilder: (context, index) => GestureDetector(
-                onTap: () => Navigator.pushNamed(context, '/description'),
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Card(
-                    elevation: 0,
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Image.network(
-                            widget.result.data?['allBooks'][index]['cover'],
-                            fit: BoxFit.cover,
-                            width: 48,
-                            height: 70,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                width: width * .7,
-                                child: Text(
-                                  widget.result.data?['allBooks'][index]
-                                      ['name'],
-                                  maxLines: 2,
-                                  style: GoogleFonts.roboto(
-                                    color: AppColors.secondaryColor,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 16,
-                                    textStyle: const TextStyle(
-                                      overflow: TextOverflow.ellipsis,
+              itemCount: _getLength(),
+              itemBuilder: (context, index) {
+                if (widget.result.data?['allBooks'][index]['category'] ==
+                    categories[selectedCategory]) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/description');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Card(
+                        elevation: 0,
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                widget.result.data?['allBooks'][index]['cover'],
+                                fit: BoxFit.cover,
+                                width: 48,
+                                height: 70,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * .7,
+                                    child: Text(
+                                      widget.result.data?['allBooks'][index]
+                                          ['name'],
+                                      maxLines: 2,
+                                      style: GoogleFonts.roboto(
+                                        color: AppColors.secondaryColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16,
+                                        textStyle: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 6),
-                                child: Text(
-                                  widget.result.data?['allBooks'][index]
-                                      ['author']['name'],
-                                  style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w400,
-                                    color: AppColors.descriptionColor,
-                                    fontSize: 14,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Text(
+                                      widget.result.data?['allBooks'][index]
+                                          ['author']['name'],
+                                      style: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.descriptionColor,
+                                        fontSize: 14,
+                                      ),
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
-                            ],
-                          ),
-                        )
-                      ],
+                            )
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ),
+                  );
+                } else if (categories[selectedCategory] == 'ALL') {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, '/description');
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Card(
+                        elevation: 0,
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: Image.network(
+                                widget.result.data?['allBooks'][index]['cover'],
+                                fit: BoxFit.cover,
+                                width: 48,
+                                height: 70,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  SizedBox(
+                                    width: width * .7,
+                                    child: Text(
+                                      widget.result.data?['allBooks'][index]
+                                          ['name'],
+                                      maxLines: 2,
+                                      style: GoogleFonts.roboto(
+                                        color: AppColors.secondaryColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 16,
+                                        textStyle: const TextStyle(
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Text(
+                                      widget.result.data?['allBooks'][index]
+                                          ['author']['name'],
+                                      style: GoogleFonts.roboto(
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.descriptionColor,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }
+                return Container();
+              },
             ),
           ),
         ],
