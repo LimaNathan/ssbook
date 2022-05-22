@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ssbook/pages/description_page.dart';
+import 'package:provider/provider.dart';
 import 'package:ssbook/pages/home_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:ssbook/provider/id.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 void main() {
@@ -13,7 +14,7 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(const MyApp());
+  runApp(Provider(create: (context) => ID(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -39,7 +40,6 @@ class MyApp extends StatelessWidget {
         ),
         routes: {
           '/': (context) => const HomePage(),
-          '/description': (context) => const DescriptionPage(),
         },
       ),
     );

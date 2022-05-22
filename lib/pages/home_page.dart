@@ -34,6 +34,7 @@ class _HomePageState extends State<HomePage> {
               author{name}
               cover
               category
+              id
             }
             favoriteAuthors{
               name
