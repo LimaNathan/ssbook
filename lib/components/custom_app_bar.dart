@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 class CustomAppBar extends StatefulWidget {
   const CustomAppBar({Key? key}) : super(key: key);
@@ -77,11 +78,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       children: [
                         Text(
                           tabs[index],
-                          style: GoogleFonts.roboto(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                            color: AppColors.secondaryColor,
-                          ),
+                          style: CustomTextTheme().alternativeOption
                         ),
                         index == selectedTab
                             ? Container(

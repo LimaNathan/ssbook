@@ -3,13 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:ssbook/pages/home_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.light,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ),
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+        statusBarColor: Colors.white,
+        systemNavigationBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.white),
   );
   runApp(const MyApp());
 }
@@ -30,13 +33,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'SSBOOK',
         theme: ThemeData(
+          
           primarySwatch: Colors.purple,
           colorScheme: ColorScheme.fromSeed(
             seedColor: AppColors.primaryColor,
           ),
         ),
-       home: const HomePage(),
-      
+        home: const HomePage(),
       ),
     );
   }

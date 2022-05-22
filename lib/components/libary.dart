@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:ssbook/pages/description_page.dart';
 import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 class Libary extends StatefulWidget {
   final QueryResult result;
@@ -19,7 +20,6 @@ class _LibaryState extends State<Libary> {
   @override
   void initState() {
     super.initState();
-
     widget.result.data?['allBooks']?.forEach((book) {
       if (!categories.contains(book['category'])) {
         categories.add(book['category']);
@@ -52,14 +52,7 @@ class _LibaryState extends State<Libary> {
             child: Padding(
               padding: const EdgeInsets.only(
                   right: 20.0, left: 20.0, top: 32, bottom: 20),
-              child: Text(
-                'Biblioteca',
-                style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: AppColors.secondaryColor,
-                ),
-              ),
+              child: Text('Biblioteca', style: CustomTextTheme().title2),
             ),
           ),
           ConstrainedBox(
@@ -161,14 +154,7 @@ class _LibaryState extends State<Libary> {
                                       widget.result.data?['allBooks'][index]
                                           ['name'],
                                       maxLines: 2,
-                                      style: GoogleFonts.roboto(
-                                        color: AppColors.secondaryColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        textStyle: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
+                                      style: CustomTextTheme().title,
                                     ),
                                   ),
                                   Padding(
@@ -176,11 +162,7 @@ class _LibaryState extends State<Libary> {
                                     child: Text(
                                       widget.result.data?['allBooks'][index]
                                           ['author']['name'],
-                                      style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.descriptionColor,
-                                        fontSize: 14,
-                                      ),
+                                      style: CustomTextTheme().subtitle,
                                     ),
                                   ),
                                 ],
@@ -233,29 +215,17 @@ class _LibaryState extends State<Libary> {
                                   SizedBox(
                                     width: width * .7,
                                     child: Text(
-                                      widget.result.data?['allBooks'][index]
-                                          ['name'],
-                                      maxLines: 2,
-                                      style: GoogleFonts.roboto(
-                                        color: AppColors.secondaryColor,
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        textStyle: const TextStyle(
-                                          overflow: TextOverflow.ellipsis,
-                                        ),
-                                      ),
-                                    ),
+                                        widget.result.data?['allBooks'][index]
+                                            ['name'],
+                                        maxLines: 2,
+                                        style: CustomTextTheme().title),
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.only(top: 6),
                                     child: Text(
                                       widget.result.data?['allBooks'][index]
                                           ['author']['name'],
-                                      style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w400,
-                                        color: AppColors.descriptionColor,
-                                        fontSize: 14,
-                                      ),
+                                      style: CustomTextTheme().subtitle,
                                     ),
                                   ),
                                 ],

@@ -5,48 +5,25 @@ import 'package:ssbook/components/custom_nav_bar.dart';
 import 'package:ssbook/components/fav_authors.dart';
 import 'package:ssbook/components/fav_list.dart';
 import 'package:ssbook/components/libary.dart';
+import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/queries.dart' as queries;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  String getQueries = """
-         query GetFavBooks{
-            favoriteBooks{
-              cover
-              name
-              author {name}
-              description
-              isFavorite
-            }
-            allBooks{
-              name
-              author{name}
-              cover
-              category
-              id
-              isFavorite
-              description
-            }
-            favoriteAuthors{
-              name
-              picture
-              booksCount
-            }
-          }
-
-""";
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
     return Query(
-      options: QueryOptions(document: gql(getQueries)),
+      options: QueryOptions(document: gql(queries.getBooks)),
       builder: (
         QueryResult result, {
         VoidCallback? refetch,
@@ -61,7 +38,7 @@ class _HomePageState extends State<HomePage> {
         }
 
         return Scaffold(
-          backgroundColor: const Color(0xffF7F7F7),
+          backgroundColor: AppColors.homeBackgroundColor,
           appBar: PreferredSize(
             preferredSize: Size(
               double.infinity,

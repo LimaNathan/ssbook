@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 import '../utils/app_colors.dart';
 
@@ -16,7 +16,6 @@ class _FavAuthorsState extends State<FavAuthors> {
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     return Column(
       children: [
@@ -27,11 +26,7 @@ class _FavAuthorsState extends State<FavAuthors> {
             children: [
               Text(
                 'Autores Favoritos',
-                style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: AppColors.secondaryColor,
-                ),
+                style: CustomTextTheme().title2,
               ),
               TextButton(
                 onPressed: () {},
@@ -39,11 +34,7 @@ class _FavAuthorsState extends State<FavAuthors> {
                   alignment: Alignment.center,
                   child: Text(
                     'ver todos',
-                    style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: AppColors.primaryColor,
-                    ),
+                    style: CustomTextTheme().option,
                   ),
                 ),
               )
@@ -97,22 +88,14 @@ class _FavAuthorsState extends State<FavAuthors> {
                                       widget.result.data?['favoriteAuthors']
                                           [index]['name'],
                                       maxLines: 2,
-                                      style: GoogleFonts.roboto(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 16,
-                                        color: AppColors.secondaryColor,
-                                      ),
+                                      style: CustomTextTheme().title,
                                       overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ),
                                 Text(
                                   '${widget.result.data?['favoriteAuthors'][index]['booksCount']} livros',
-                                  style: GoogleFonts.roboto(
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                    color: AppColors.descriptionColor,
-                                  ),
+                                  style: CustomTextTheme().subtitle,
                                 )
                               ],
                             ),

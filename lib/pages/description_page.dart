@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ssbook/components/custom_nav_bar.dart';
 import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 class DescriptionPage extends StatefulWidget {
   final String name;
@@ -23,13 +24,6 @@ class DescriptionPage extends StatefulWidget {
 }
 
 class _DescriptionPageState extends State<DescriptionPage> {
-  var selector = 0;
-  void _onItemTapped(int value) {
-    setState(() {
-      selector = value;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     var heigth = MediaQuery.of(context).size.height;
@@ -74,24 +68,10 @@ class _DescriptionPageState extends State<DescriptionPage> {
                             Text(
                               widget.name,
                               maxLines: 2,
-                              style: GoogleFonts.roboto(
-                                color: AppColors.secondaryColor,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w700,
-                                textStyle: const TextStyle(
-                                    overflow: TextOverflow.ellipsis),
-                              ),
+                              style: CustomTextTheme().title2,
                             ),
-                            Text(
-                              widget.author,
-                              style: GoogleFonts.roboto(
-                                color: AppColors.secondaryColor,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                                textStyle: const TextStyle(
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                            ),
+                            Text(widget.author,
+                                style: CustomTextTheme().subtitle),
                           ],
                         ),
                       ),

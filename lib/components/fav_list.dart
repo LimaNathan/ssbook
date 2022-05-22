@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:ssbook/pages/description_page.dart';
-import 'package:ssbook/utils/app_colors.dart';
+import 'package:ssbook/utils/text_theme.dart';
 
 class FavoriteList extends StatefulWidget {
   final QueryResult result;
@@ -26,11 +25,7 @@ class _FavoriteListState extends State<FavoriteList> {
             children: [
               Text(
                 'Livros Favoritos',
-                style: GoogleFonts.roboto(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 20,
-                  color: AppColors.secondaryColor,
-                ),
+                style: CustomTextTheme().title2,
               ),
               TextButton(
                 onPressed: () {},
@@ -38,11 +33,7 @@ class _FavoriteListState extends State<FavoriteList> {
                   alignment: Alignment.center,
                   child: Text(
                     'ver todos',
-                    style: GoogleFonts.roboto(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: AppColors.primaryColor,
-                    ),
+                    style: CustomTextTheme().option,
                   ),
                 ),
               )
@@ -88,25 +79,14 @@ class _FavoriteListState extends State<FavoriteList> {
                     const SizedBox(height: 10),
                     Text(
                       widget.result.data?['favoriteBooks'][index]['name'],
-                      style: GoogleFonts.roboto(
-                        color: AppColors.secondaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                        textStyle: const TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
+                      style: CustomTextTheme().title,
                       maxLines: 2,
                     ),
                     const SizedBox(height: 2),
                     Text(
                       widget.result.data?['favoriteBooks'][index]['author']
                           ['name'],
-                      style: GoogleFonts.roboto(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                        color: AppColors.descriptionColor,
-                      ),
+                      style: CustomTextTheme().subtitle,
                     )
                   ],
                 ),
