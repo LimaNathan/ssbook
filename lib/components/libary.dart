@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:ssbook/pages/description_page.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 class Libary extends StatefulWidget {
@@ -52,7 +53,7 @@ class _LibaryState extends State<Libary> {
               padding: const EdgeInsets.only(
                   right: 20.0, left: 20.0, top: 32, bottom: 20),
               child: Text(
-                'Livros Favoritos',
+                'Biblioteca',
                 style: GoogleFonts.roboto(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
@@ -118,7 +119,21 @@ class _LibaryState extends State<Libary> {
                     categories[selectedCategory]) {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/description');
+                      var resumedResult =
+                          widget.result.data?['allBooks'][index];
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => DescriptionPage(
+                            name: resumedResult['name'].toString(),
+                            cover: resumedResult['cover'].toString(),
+                            author: resumedResult['author']['name'].toString(),
+                            description:
+                                resumedResult['description'].toString(),
+                            isFavorite: resumedResult['isFavorite'],
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -179,7 +194,21 @@ class _LibaryState extends State<Libary> {
                 } else if (categories[selectedCategory] == 'ALL') {
                   return GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/description');
+                      var resumedResult =
+                          widget.result.data?['allBooks'][index];
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => DescriptionPage(
+                            name: resumedResult['name'].toString(),
+                            cover: resumedResult['cover'].toString(),
+                            author: resumedResult['author']['name'].toString(),
+                            description:
+                                resumedResult['description'].toString(),
+                            isFavorite: resumedResult['isFavorite'],
+                          ),
+                        ),
+                      );
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),

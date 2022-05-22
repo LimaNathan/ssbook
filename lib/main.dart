@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'package:ssbook/pages/home_page.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:ssbook/provider/id.dart';
 import 'package:ssbook/utils/app_colors.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
       systemNavigationBarIconBrightness: Brightness.dark,
     ),
   );
-  runApp(Provider(create: (context) => ID(), child: const MyApp()));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,9 +35,8 @@ class MyApp extends StatelessWidget {
             seedColor: AppColors.primaryColor,
           ),
         ),
-        routes: {
-          '/': (context) => const HomePage(),
-        },
+       home: const HomePage(),
+      
       ),
     );
   }
